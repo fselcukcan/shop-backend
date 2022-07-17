@@ -1,11 +1,30 @@
-export const handler = (event, context, callback) => {
+import productsMock from "./products.mock";
+
+export const handler = async (event, context, callback) => {
   const p = new Promise((resolve) => {
-    resolve('success');
+    resolve(productsMock);
   });
-  p.then(() =>
+
+  try {
+    const result = await p;
+    
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: result,
+          input: event,
+        },
+        null,
+        2
+      ),
+    };
+
     callback(null, {
-      message: 'Go Serverless Webpack (Ecma Script) v1.0! First module!',
+      message: response,
       event,
-    })
-  ).catch((e) => callback(e));
+    });
+  } catch (error) {
+    callback(err);
+  }
 };

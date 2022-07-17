@@ -1,17 +1,28 @@
+import productsMock from "./products.mock";
+
 export const handler = (event, context, cb) => {
   const p = new Promise((resolve) => {
-    resolve('success');
+    const filteredProducts = productsMock.filter(product => product);
+    resolve(filteredProducts);
   });
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless Webpack (Ecma Script) v1.0! Second module!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
-  p.then(() => cb(null, response)).catch((e) => cb(e));
+  
+  try {
+    const result = await p;
+
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: result,
+          input: event,
+        },
+        null,
+        2
+      ),
+    };
+    
+    cb(null, response)
+  } catch (error) {
+    cb(error)
+  }
 };
