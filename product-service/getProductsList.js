@@ -1,8 +1,8 @@
-import productsMock from "./products.mock";
+import productList from "./productList.json";
 
 export const handler = async (event, context, callback) => {
   const p = new Promise((resolve) => {
-    resolve(productsMock);
+    resolve(productList);
   });
 
   try {

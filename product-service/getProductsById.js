@@ -1,8 +1,8 @@
-import productsMock from "./products.mock";
+import productList from "./productList.json";
 
 export const handler = (event, context, cb) => {
   const p = new Promise((resolve) => {
-    const filteredProducts = productsMock.filter(product => product);
+    const filteredProducts = productList.filter(product => product);
     resolve(filteredProducts);
   });
   
@@ -20,7 +20,7 @@ export const handler = (event, context, cb) => {
         2
       ),
     };
-    
+
     cb(null, response)
   } catch (error) {
     cb(error)
