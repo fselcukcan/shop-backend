@@ -18,6 +18,7 @@ provider:
     cors:
       allowedOrigins:
         - https://d3txv4isrw4dhz.cloudfront.net
+        - http://localhost:3000
       allowedHeaders:
         - Content-Type
         # - Authorization
