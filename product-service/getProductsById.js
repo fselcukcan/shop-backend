@@ -1,9 +1,11 @@
 import productList from "./productList.json";
 
-export const handler = (event, context, cb) => {
+export const handler = async (event, context, cb) => {
+  const { productId } = event.pathParameters;
+  
   const p = new Promise((resolve) => {
-    const filteredProducts = productList.filter(product => product);
-    resolve(filteredProducts);
+    const foundProduct = productList.find(({id}) => id === productId);
+    resolve(foundProduct);
   });
   
   try {
@@ -12,10 +14,7 @@ export const handler = (event, context, cb) => {
     const response = {
       statusCode: 200,
       body: JSON.stringify(
-        {
-          message: result,
-          input: event,
-        },
+        result,
         null,
         2
       ),

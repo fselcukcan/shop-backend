@@ -1,5 +1,5 @@
-service:
-  name: product-service
+service: product-service
+#  name: product-service
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -14,6 +14,15 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: eu-central-1
+  httpApi:
+    cors:
+      allowedOrigins:
+        - https://d3txv4isrw4dhz.cloudfront.net
+      allowedHeaders:
+        - Content-Type
+        # - Authorization
+      allowedMethods:
+        - GET
 
 functions:
   getProductsList:
@@ -22,7 +31,7 @@ functions:
       - httpApi:
           method: get
           path: /products
-  second:
+  getProductsById:
     handler: getProductsById.handler
     events:
       - httpApi:

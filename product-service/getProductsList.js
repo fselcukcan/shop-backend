@@ -11,20 +11,14 @@ export const handler = async (event, context, callback) => {
     const response = {
       statusCode: 200,
       body: JSON.stringify(
-        {
-          message: result,
-          input: event,
-        },
+        result,
         null,
         2
       ),
     };
 
-    callback(null, {
-      message: response,
-      event,
-    });
+    callback(null, response);
   } catch (error) {
-    callback(err);
+    callback(error);
   }
 };
